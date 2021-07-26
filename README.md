@@ -1,4 +1,4 @@
-# JavaScript code with comments from the course: ***JavaScript - The Complete Guide 2021 (Beginner + Advanced) by Maximilian Schwarzmüller***
+# JavaScript code from the course: ***JavaScript - The Complete Guide 2021 (Beginner + Advanced) by Maximilian Schwarzmüller***
 
 <div align="center">
   <a href="https://www.udemy.com/course/javascript-the-complete-guide-2020-beginner-advanced/" target="_blank">
