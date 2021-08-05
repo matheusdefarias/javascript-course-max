@@ -28,7 +28,7 @@ function writeToLog(operationIdentifier, prevResult, operationNumber, newResult)
 }
 
 /*
-The following functions are related to aithimetic operations
+The following functions are related to arithmetic operations
 - Addition - add()
 - Subtraction - subtract()
 - Multiplication - multiply()
