@@ -13,6 +13,6 @@
     Click on the image to access the course.
   </p>
   <p>
-    Status: <strong><i>In progress</i></strong>
+    Status: <strong><i>In progress:hourglass_flowing_sand:</i></strong>
   </p>
 </div>
