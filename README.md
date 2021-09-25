@@ -12,4 +12,7 @@
   <p>
     Click on the image to access the course.
   </p>
+  <p>
+    Status: In progress
+  </p>
 </div>
