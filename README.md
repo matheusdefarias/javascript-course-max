@@ -13,6 +13,6 @@
     Click on the image to access the course.
   </p>
   <p>
-    Status: In progress
+    Status: <strong><i>In progress</i></strong>
   </p>
 </div>
