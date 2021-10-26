@@ -1,0 +1,19 @@
+# Important concepts learned and notes
+
+-> Useful link: https://academind.com/tutorials/javascript-tricky-parts
+
+- Variables scope
+- Hoisting
+- var, let and const usage
+- typeof
+- undefined, null and NaN
+- Shadowed variables
+- defer and async
+- "Indirect" vs "Direct" function execution
+    - someButton.addEventListener('click', add);
+- Mixing numbers & strings
+    - 3 + '3' => '33'
+    - 'hi' - 'i' => NaN
+    - 3 * '3' => 9
+    - 3 - '3' => 0
+    - 3 / '3' => 1
