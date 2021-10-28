@@ -1,0 +1,4 @@
+# Important concepts learned and notes
+
+- Beyond true/false: "Truthy" and "Falsy" Values
+- Coercion vs Conversion
