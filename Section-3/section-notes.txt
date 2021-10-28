@@ -1,0 +1,6 @@
+# Important concepts learned and notes
+
+- Browser Devtools
+- Debugging code(class number 68)
+- How to use breakpoints(class number 68)
+- Testing code changes directly in the Devtools(class number 69)
