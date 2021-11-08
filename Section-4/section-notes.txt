@@ -2,3 +2,21 @@
 
 - Beyond true/false: "Truthy" and "Falsy" Values
 - Coercion vs Conversion
+- Built in functions in javascript
+    - parseInt(variable) or +variable
+    - isNaN(variable)
+- Ternary Operator(class 93)
+    - let userName = isLogin ? 'Max' : null
+- Statements vs Expressions
+- Logical Operator "Tricks" & Shorthands(classes 95 and 96)
+    - !!"" / !!1 -> false / true
+    - const name = someInput || 'Max' -> someInput if not falsy, 'Max' otherwise
+    - const name = isLoggedIn && 'Max' -> 'Max' is set if isLoggedIn is true, false otherwise
+    - Conclusion
+        - const variable = value1 || value2:
+            - if value1 is falsy and value2 is truthy -> return value2
+            - if value1 is truthy and value2 is truthy -> return value1
+         - const variable = value1 && value2:
+            - if value1 and value2 are truthy -> return value2
+            - if value1 is falsy and value2 is truthy -> return value1
+            - if value1 is truthy and value2 is falsy -> return value2
