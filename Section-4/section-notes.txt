@@ -1,13 +1,34 @@
 # Important concepts learned and notes
+- (x == y) evaluate the value between two variables
+- (x === y) evaluate the value and the type between/of two variables
 
 - Beyond true/false: "Truthy" and "Falsy" Values
+    - Truthy: non-empty strings, values different from null, undefined, NaN, numbers including negative numbers, objects, arrays
+    - Falsy: values equals to null, undefined, NaN, empty strings, 0
+
+- Global constant convention: const VARIABLE_NAME = value; -- Upper case and snake case
+
+- By convention the function added to a Event Listener should has a description name for the function followed by 'Handler' or 'onClick[description]'
+    - Example:
+        - function attackHandler() {}
+        - onClickAttack() {}
+
 - Coercion vs Conversion
+
 - Built in functions in javascript
     - parseInt(variable) or +variable
     - isNaN(variable)
+
 - Ternary Operator(class 93)
+    - Always return something
+    - [variable to store the return] = [condition to be evaluated like in if statements] ? [value returned if the condition is true] : [value returned if the condition is false]
     - let userName = isLogin ? 'Max' : null
+        - if isLogin is Truthy, userName = 'Max'
+        - if isLogin is Falsy, userName = null
+
 - Statements vs Expressions
+    - https://hexlet.io/courses/intro_to_programming/lessons/expressions/theory_unit
+
 - Logical Operator "Tricks" & Shorthands(classes 95 and 96)
     - !!"" / !!1 -> false / true
     - const name = someInput || 'Max' -> someInput if not falsy, 'Max' otherwise
@@ -20,3 +41,109 @@
             - if value1 and value2 are truthy -> return value2
             - if value1 is falsy and value2 is truthy -> return value1
             - if value1 is truthy and value2 is falsy -> return value2
+
+- Introducing Loops(classes 98)
+
+    - for loop: Execute code a certain amount of times (with counter variable).
+        - Example:
+            for (let i = 0; i < 3; i++) {
+                console.log(i);
+            }
+    - for-of loop: Execute for every element in an array.
+        - Example:
+            for (const el of array) {
+                console.log(el);
+            }
+    - for-in loop: Execute for every key in an object.
+        -Example:
+            for (const key in obj) {
+                console.log(key);
+                console.log(obj[key]);
+            }
+    - foreach loop: The forEach() method calls a function for each element in an array. The forEach() method is not executed for empty elements.
+        - Example: 
+            let sum = 0;
+            const numbers = [65, 44, 12, 4];
+            numbers.forEach(myFunction);
+
+            function myFunction(item) {
+            sum += item;
+            }
+    - while loop: Execute code as long as a condition is true.
+        - Example:
+            while (isLoggedIn) {
+                ...
+            }
+
+- Controlling Loops with break/continue and labeled statements (classes 103, 104 and 105)
+
+    - Break: used to stop the execution of the current loop.
+    - Continue: used to skip the execution of the current loop and goes foward to the next loop.
+
+    - Labeled Statements: used to break or continue, for example, an outter loop from inner loop.
+        Example:
+        let i, j;
+
+        // The first for statement is labeled "loop1"
+        loop1: for (i = 0; i < 3; i++) {
+            // The second for statement is labeled "loop2"
+            loop2: for (j = 0; j < 3; j++) {
+                if (i === 1 && j === 1) {
+                continue loop1;
+                }
+                console.log(`i = ${i}, j = ${j}`);
+            }
+        }
+
+        // Logs:
+        // i = 0, j = 0
+        // i = 0, j = 1
+        // i = 0, j = 2
+        // i = 1, j = 0
+        // i = 2, j = 0
+        // i = 2, j = 1
+        // i = 2, j = 2
+
+- Throwing Custom Erros (class 107)
+    - throw [error];
+    - The [error] can be an object, a string, a number...
+    - Examples; 'An error occurred', '404', {message: 'An error occurred'}
+    - This throw [error] message is usually used when in a function or other structure is validating some data or input.
+    - This throw [error] message is chatched by the try and catch code.  
+
+- Working with "try-catch" to Catch & Handle Errors(class 108)
+    - The try-catch code is used to handle errors and avoid the application to crash.
+    - Is used to implement the fallback logic inside the catch statement.
+    - Example:
+        try {
+            //Code that should work and can throw an error.
+        } catch (error) {
+            //Code to fallback the error and show to the user the error that occurred.
+        }
+
+        function breakMe() {
+            throw {message: 'Oh no!'};
+        }
+
+        function main() {
+            try {
+                breakMe();
+            } catch (error) {
+                return error;
+            }
+        }
+
+- Javascript Objects
+    - Objects in Javascript are a JSON(Javascript Object Notation)
+    - Example:
+        {  
+            "employee": {  
+                "name":       "sonoo",   
+                "salary":      56000,   
+                "married":    true  
+            }  
+        } 
+
+    - The first curly brace represents the JSON object. Is the object.
+    - "employee" is property of the object that holds another object as a value.
+    - "name", "salary" and "married" are the properties of the inner object.      
