@@ -1,0 +1,98 @@
+- var vs let & const - Introducing "Block Scope"(class 113)
+    - var:
+        - Creates a variable
+        - Available since ever
+        - Allows to create variables in the function and global scope. 
+        - Global and Block scopes
+        - A 'var variable', it is seen globally.
+    - let: variable can be reassigned.
+        - Creates a variable
+        - Available since ES6 
+        - Block scope  
+        - If a 'const variable' is created betweem curly braces, it is scopped to that block. It is not seen globally. But, if it is a 'var variable', it is seen globally.
+    - const: variables with constant values. Can't be reassigned.
+        - Creates a constant
+        - Available since ES6 
+        - Block scope
+        - If a 'const variable' is created betweem curly braces, it is scopped to that block. It is not seen globally. But, if it is a 'var variable', it is seen globally.
+    
+    ** The recommendation is to use only let and const. Never var.
+
+- Understanding Hoisting(class 114)
+    - var allows Hoisting.
+    - let and const throws an error.
+    - The browser, when executing Javascript code, first parses the code looking for functions and variable declarations. These functions and variable declarations are placed at the beginning of the script automatically by the browser engine. After that, the code is actually executed. This lets you write functions after the line of code that calls them and lets you use variables before the lines where they're declared.
+    - Avoid Hoisting for best practices.
+
+- Strict Mode & Writing Good Code(class 115)
+    - Javascript has an internal mechanism that if the developer forgets to use var, let or const in the declaration of a variable, the engine automatically places it. Javascript also "allows" to use reserved words as variable names. To avoid this, you can use Strict Mode. With Strict Mode activated, instead of allowing Javascript, an error is generated.
+
+- Primitive vs Reference Values
+    - Primitive values: Strings, Numbers, Booleans, null, undefined, Symbol 
+        - Stored in memory (normally on Stack)
+        - Copying a variable (= assing to different variable) copies the value. The value is not passed by reference, instead by value. Modifying the first variable will not affect the second variable.
+        - The variable stores a value
+        - Example: 
+            //Execution in Browser Console
+            let name = 'Max';
+            name // 'Max'
+            let anotherUser = name; // Copying the value
+            anotherUser // 'Max'
+            name = 'Manuel';
+            anotherUser // 'Max'
+    - Reference values: All other objects ("more expensive to create")
+        - Stored in memory (Heap), variables stores a pointer (adsress) to location in memory
+        - The variable stores a memory address
+        - Example 1:
+            //Execution in Browser Console
+            let hobbies = ['Sports'];
+            let newHobbies = hobbies; // Passing the reference(memory address) to be stored in 'newHobbies'
+            hobbies // ['Sports']
+            newHobbies // ['Sports']
+            hobbies.push('Cooking'); // Because the reference of 'hobbies' has been passed to 'newHobbies', every change in 'hobbies' will affect 'newHobbies'
+            hobbies // ['Sports','Cooking']
+            newHobbies // ['Sports','Cooking']
+        
+        - Example 2:
+            //Execution in Browser Console
+            let person = {age: 30};
+            let anotherPerson = person; // Passing the reference(memory address) to be stored in 'newHobbies'
+            anotherPerson.age = 32;
+            person // {age: 32} Because the reference of 'person' has been passed to 'anotherPerson', every change in 'person' will affect 'anotherPerson'
+
+        - Example 3: 
+            //Execution in Browser Console
+            //In this example, is required to create a real copy in 'let yetAnotherPerson'
+            let yetAnotherPerson = person; // This will not work. The reference is being passed, not the value
+            let yetAnotherPerson = {...person}; // The 3 dots notation '...' is called spread operator. Adding the spread operator('...') inside an object and then the object that is required to be copied, all key-values pairs of the old object will be copied to the new object. 
+            yetAnotherPerson // {age: 32}
+            person.age = 30; // The 'age' property of the object 'person' was changed to 30.
+            yetAnotherPerson // {age: 32} // The chenge of the 'age' value in 'person' object will not affect the 'age' of 'yetAnotherPerson' object, because the 'person' object was copied to the 'yetAnotherPerson', not passed by reference
+
+        - Example 4: 
+            //Execution in Browser Console
+            let person1 = {age: 30};
+            let person2 = {age: 30};
+            person1 === person2
+            // false // Because 'person1' and 'person2' are storing memory addresses and these memory addresses are different
+
+        - Example 5: 
+            //Execution in Browser Console
+            const hobbies = ['Sports'];
+            hobbies.push('Cooking'); // It works!!
+            hobbies // ['Sports','Cooking']
+            hobbies = ['Sports','Cooking']; // An error is generated
+            Explanation: 'const hobbies' is storing a memory address. When 'hobbies.push('Cooking');' is executed the content inside the memory address is being modified, not the memory address stored in 'hobbies' that remains the same. Because of that no error happened. But when 'hobbies = ['Sports','Cooking']' is execute, an error is generated because a new object(new array) is being assigned to the variable 'hobbies' that is a constant.
+
+        - Example 6: 
+            //Execution in Browser Console
+            const person = {age: 30};
+            person // {age: 30}
+            person.age = 32; // It works!!
+            person // {age: 32}
+            person = {age: 33}; // An error is generated
+            Explanation: 'const person' is storing a memory address. When 'person.age = 32;' is executed the content inside the memory address is being modified, not the memory address stored in 'person' that remains the same. Because of that no error happened. But when 'person = {age: 33};' is execute, an error is generated because a new object({age: 33}) is being assigned to the variable 'person' that is a constant.
+
+- Garbage Collection & Memory Management
+    - Garbage Collector periodically checks Heap for unused objects (objects without references)
+    
