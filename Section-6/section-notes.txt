@@ -1,0 +1,136 @@
+- Functions vs. Methods
+    - Functions inside objects are called Methods
+    - Examples:
+        const person = {
+            name: 'Max',
+            greet: function gree(){
+                // Code here
+            }
+        }
+        const person = {
+            name: 'Max',
+            greet: function(){
+                // Code here
+            }
+        }
+        const person = {
+            name: 'Max',
+            gree(){
+                // Code here
+            }
+        }
+
+- Functions are objects
+    - Example:
+        //Execution in Browser Console
+        console.dir([functionName])
+        // The return of the 'console.dir' is an object with several informations about the function passed as argument.
+
+- Function Expressions: Storing Functions in Variables
+    - Examples:
+        function startGame(){} // Function as a declaration
+        const start = function startGame(){}; // Function as a expression. This function is an object and can be stored in a variable. To call this function, the 'start' variable is used instead the name of the function 'startGame'. 
+        start();
+
+- Function Expressions vs Function Declarations
+    - Function Expressions: Hoisted to top, can be declared anywhere in the file (i.e. also after it's used)
+        - Example:
+            function startGame(){
+                // Code here
+            }
+    - Function Declarations: Hoisted to top but not initialized/defined, can't be declared anywhere in the file (i.e. not after it's used)
+        - Example:
+            const start = function startGame(){
+                // Code here
+            };
+
+- Anonymous Functions
+    - Are functions that don't need to set the function's name.
+    - Always must store the Anonymous Function in a variable
+    - Can use Anonymous Function instead Arrow Function
+    - Can't be declared as Function Declarations
+    - Example 1:
+        const start = function(){
+                // Code here
+            }; 
+
+    - Example 2:
+        startGameBtn.addEventListener('click', function(){
+            console.log('Game is starting...');
+        });
+
+- Introducing Arrow Functions
+    - Always must store the Arrow Function in a variable
+    - Can use Arrow Function instead Anonymous Function
+    - Can't be declared as Function Declarations
+    - Example 1:
+        const variable = () => {
+            //Code Here
+        };
+    
+    - Example 2:
+        const variable = (param1, param2) => {
+            //Code Here
+            return param1 + param2;
+        };
+
+    - Example 3:
+        const variable = param1 => {
+            //Code Here
+        };
+
+    - Example 4:
+        const variable = (param1, param2) => param1 + param2
+
+- Introducing Rest Parameters ("Rest Operator")
+    - Rest Operator: '...' (must be inside of function parameters list)
+    - The Rest Operator allow call a function passing an undefined number of arguments.
+    - The Rest Operator gets all arguments passed in the function call and store inside an array in the 'number' variable(Example 1).
+    - Some parameters can come before the Rest Operator to get individual arguments and then the Rest Operator gets the rest arguments and store them inside an array(Example 2).
+    - Example 1:
+        const sumUp = (...numbers) => {
+        let sum = 0;
+        for (const num of numbers) {
+            sum += num;
+        }
+        return sum;
+        };
+
+        console.log(sumUp(1, 5, 10, -3, 6, 10));
+        console.log(sumUp(1, 5, 10, -3, 6, 10, 25, 88));
+
+    - Example 2:
+        const sumUp = (a, b, ...numbers) => {
+        let sum = 0;
+        for (const num of numbers) {
+            sum += num;
+        }
+        return sum;
+        };
+
+        console.log(sumUp(1, 5, 10, -3, 6, 10));
+        console.log(sumUp(1, 5, 10, -3, 6, 10, 25, 88));
+
+- Creating Functions Inside of Functions
+    - Example:
+        const sumUp = (a, b, ...numbers) => {
+            const validateNumber = (number) => {
+                return isNaN(number) ? 0 : number;
+            };
+
+            let sum = 0;
+            for (const num of numbers) {
+                sum += validateNumber(num);
+            }
+            return sum;
+        };
+
+        console.log(sumUp(1, 5, 'fdsa', -3, 6, 10));
+        console.log(sumUp(1, 5, 10, -3, 6, 10, 25, 88));
+
+- Understanding Callback Functions
+    - https://www.freecodecamp.org/news/javascript-callback-functions-what-are-callbacks-in-js-and-how-to-use-them/
+    - https://www.youtube.com/watch?v=QSqc6MMS6Fk&ab_channel=ColorCode
+        
+- Working with ".bind()", ".call()" and ".apply()"
+    - https://www.youtube.com/watch?v=fVXp7ZWjlO4&ab_channel=ColorCode
