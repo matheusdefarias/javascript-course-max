@@ -134,3 +134,4 @@
         
 - Working with ".bind()", ".call()" and ".apply()"
     - https://www.youtube.com/watch?v=fVXp7ZWjlO4&ab_channel=ColorCode
+    - https://www.freecodecamp.org/news/understand-call-apply-and-bind-in-javascript-with-examples/
