@@ -1,0 +1,187 @@
+- What's the "DOM"? / Document and Window Object
+    - DOM -> Document Object Model
+    - It is the entire HTML document after it has been parsed and rendered by the browser. The DOM is structured hierarchically by the elements (tags) present in the HTML.
+    - The browser provides two main objects by default.
+        - 'window' object: Is the main object. It represents every browser window or tab. The 'window' object has a property called 'document' that is an object too. 
+        - 'document' object: The 'documento' object is inside the 'window' object and represents the html documento/page itself that was parsed and rendered.
+
+- Understanding the DOM and how it's created
+    - Based on a HTML file, the browser parses the HTML code and creates an object representation of that because the browser doesn't work with text, but with objects that are stored in memory.
+    -   HTML(Root Element Node or just Root Element)
+        |
+        |__ HEAD(Element Node or just Element)
+        |    |
+        |    |__TITLE(Element Node or just Element)
+        |      
+        |__BODY(Element Node or just Element)
+        |   |
+        |   |__HEADER(Element Node or just Element)
+        |        |
+        |        |__H1(Element Node or just Element)
+        |
+    
+- Node & Elements - Querying the DOM Overview
+    - DOM Nodes are just Javascript objects in the end - i.e. reference values. These methods return the object references(addresses).
+    - Return single elements: 
+        - querySelector(), getElementById(), ...
+        - Different ways of querying elements(by CSS selector, by ID)
+        - Direct reference to DOM element is returned
+    
+    - Return collections of elements (array-like objects): NodeList:
+        - querySelectorAll(), getElementsByTagName(), ...
+        - Different ways of querying elements(by CSS selector, by tag name, by CSS class)
+        - querySelectorAll() returns a non-live NodeList, getXByY return live NodeLists
+
+    - Nodes:
+        - The objects that make up the DOM
+        - HTML tags are "element nodes" (or just "elements")
+        - Text creates "text nodes"
+        - Attributes create "attributes nodes"
+    
+    - Elements:
+        - Elements are one type of nodes
+        - Special properties and methods to interact with the elements
+        - Available methods and properties depend on the kind of element
+        - Can be selected in various different ways (via Javascript)
+        - Can be created and removed via Javascript
+
+- Selecting Elements in the DOM
+    - Here's a summary of the various methods you got to reach out to DOM elements (note: you can only query for element nodes).
+    - The most common way to select elements in the DOM is using the querySelector() method.
+    - The querySelector() method return only one and the first element in the DOM that matches with the argument that is being passed to the method.
+    - The querySelector() method accepts any type of argument, but you need to pass these arguments like CSS selectors, for example:
+        - A class: .className
+        - A ID: #idName
+        - A Tag Name: tagName
+        - To select more than one element, is used the querySelectorAll() method
+    - Other methods used to select elements in the DOM:
+        - getElementById()
+        - getElementsByClassName()
+        - getElementsByTagName()
+        - For these methods, you just need to pass as arguments the name of the ID, Class or Tag Name, for example. It is not needed to pass the hash tag(#), dot(.) symbols.
+    
+    document.body => Selects the <body> element node.
+    document.head => Selects the <head> element node.
+    document.documentElement => Selects the <html> element node
+
+- Exploring and Changing DOM Properties
+    - A new way to provide a style to a element
+    - [element].style.[style property] = '[value]';
+
+- Attributes vs Properties
+    - Attributes exists in HTML tag/elements
+        - <input id="input-1" class="input-default" value="Enter text...">
+        - For example: id, class, value
+    - Properties exists in Javascript objects
+        - For example: obj.id, obj.className, obj.value
+        - Propertues are automatically added on created DOM objects
+    
+    - 1:1 mapping (+ live-sync) -> input.id
+    - Different names (but live-sync) -> input.className
+    - 1:1 mapping (1-way live-sync) -> input.value
+
+    - For 'id' and 'class', it is possible change its values through Javascript accessing the object properties and that changes will reflect on the attributes in the HTML tag.
+    - For 'value' attribute, change its value through Javascript object property will not work, will not change the value of the attribute. Will change the text in browser but the attribute's value remains the same.
+    - If we change the attribute's value, it will reflect on the property value.
+    - To change the attribute's value through Javascript object property, it is necessary to use two methods, for example:
+        - Example:
+            <input id="input-1" class="input-default" value="Enter text...">
+            const input = document.querySelector('input');
+            input.setAttribute('value', 'some other default text'); // [elementObject].setAttribute('[attribute name]', '[attribute value]');
+            input.value = input.getAttribute('value'); // [elementObject].value = [elementObject].getAttribute('[attribute name]');
+
+- Selecting Multiple Elements & Summary
+    - document.querySelectorAll('[tag name]'); 
+        - Do not allow live changes
+        - If the text is changed or an element is added or removed, it will not change the list because querySelectorAll returns just a snapshot
+    - document.getElementsByTagName('[tag name]');
+        - Allow live changes
+        - If the text is changed or an element is added or removed, it will change the list because document.getElementsByTagName return a reference of the object
+
+        - Example:
+            const listItemElements = document.querySelectorAll('li'); // No live change
+            const listItemElements = document.getElementsByTagName('li'); // Live change
+
+            for (const listItemEl of listItemElements) {
+                console.dir(listItemEl);
+            }
+    
+    - textContent vs. innerHTML
+        - https://www.geeksforgeeks.org/difference-between-textcontent-and-innerhtml/
+        - https://medium.com/@stevriss22/differences-between-innertext-textcontent-innerhtml-23268b2ac7b2
+
+- Traversing the DOM
+    - Child
+        - Direct child node or element
+        - Example:
+            <div>
+                <p>
+                    A <em>test!</em>
+                </p>
+            </div>
+        - <p> is a child of <div>. <em> is not!
+
+    - Descendant
+        - Direct or indirect child node or element
+        - Example:
+            <div>
+                <p>
+                    A <em>test!</em>
+                </p>
+            </div>
+        - <p> is a descendant of <div>. So is <em>!
+
+    - Parent
+        - Direct parent node or element
+        - Example:
+            <div>
+                <p>
+                    A <em>test!</em>
+                </p>
+            </div>
+        - <div> is a parent of <p> but not of <em>!
+
+    - Ancestor
+        - Direct or indirect parent node or element
+        - Example:
+            <div>
+                <p>
+                    A <em>test!</em>
+                </p>
+            </div>
+        - <div> is a ancestor of <p> and of <em>!
+
+    - Ways to select a Parent:
+        - parentNode, parentElement, closest()
+    
+    - Ways to select a child:
+        - childNodes, children, querySelector(), ...
+        - firstChild, firstElementChild
+        - lastChild, lastElementChild
+        - previousSibling, previousElementSibling
+        - nextSibling, nextElementSibling
+
+- Styling DOM elements
+
+    - Via 'style' property
+        - Directly target individual CSS styles (on the element)
+        - Controls styles as inline styles on the element
+        - Style property names are based on CSS properties but have adjusted names (e.g. backgroundColor)
+        - element.style.backgroundColor = 'blue';
+
+    - Via className
+        - Directly set the CSS classes assigned to the element
+        - Set/Control all classes at once
+        - You can also control the id or other properties
+        - element.className = 'red-bg';
+
+    - Via classList
+        - Conveniently add, remove or toggle CSS classes
+        - Fine-grained control over classes that are added
+        - Can be used with className (with care)
+        - element.classList.add()
+        - element.classList.remove()
+        - element.classList.toggle('visible')
+        - element.classList.toggle('invisible')
+        - Obs: for classList.toggle(), the toggle() method checks if the class 'visible' exists. If exists, the method removes the class. If do not exists, the method adds the class.
+    
