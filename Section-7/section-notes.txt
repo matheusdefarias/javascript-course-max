@@ -184,4 +184,84 @@
         - element.classList.toggle('visible')
         - element.classList.toggle('invisible')
         - Obs: for classList.toggle(), the toggle() method checks if the class 'visible' exists. If exists, the method removes the class. If do not exists, the method adds the class.
+
+- Creating Elements with JS 
+    - HTML string
+        - innerHTML                 ->          Add(render) HTML string
+        - insertAdjacentHTML()      ->          Add(render) HTML string in specific position
+
+    - createElement()
+        - appendChild() / append()                          ->          Append new DOM element/node
+        - prepend(), before(), after(), insertBedore()      ->          Insert new DOM element/node in specific position
+        - replaceChild(), replaceWith()                     ->          Replace existing DOM element/node with new one
     
+- Adding Elements via HTML in Code
+    - element.textContent: the content, only text, assigned replace all the old content inside the element including children's content
+    - element.innerHTML: the content, HTML code(tags) and text, assigned replace all the old content inside the element including children's content
+    - element.insertAdjacentHTML: the content, HTML code(tags) and text, assigned will be placed based on the position argument passed and does not replace the old content
+
+- Adding Elements via createElement() 
+    - Example: Add a list item(<li>) in an unordered list(<ul>)
+        1) Select the element where the <li> element will be inserted, in this case, select <ul> element.
+            const list = document.querySelector('ul');
+        2) Create the element that will be added inside the <ul> element, in this case, create the <li> element.
+            const newLi = document.createElement('li');
+        3) Insert the <li> element inside the <ul> element.
+            list.appendChild(newLi);
+        4) Add content to the element <li> inserted inside <ul> element.
+            newLi.textContent = 'Item 4';
+        
+        Obs: In this way to add a new element, is possible to access all the properties of the element directly. In the other methods, after inserting the element, it is necessary to query the element to access its properties.
+
+        // The code together
+        const list = document.querySelector('ul');
+        const newLi = document.createElement('li');
+        list.appendChild(newLi);
+        newLi.textContent = 'Item 4';
+
+- Inserting DOM Elements 
+    - Example: Add a list item(<li>) before the last list item of an unordered list(<ul>)
+        1) Select the element where the <li> element will be inserted, in this case, select <ul> element.
+            const list = document.querySelector('ul');
+        2) Create the element that will be added inside the <ul> element, in this case, create the <li> element.
+            const newLi = document.createElement('li');
+        3) Add content to the element <li> inserted inside <ul> element.
+            newLi.textContent = 'Item 4';
+        4) Insert the <li> element before the last element(last list item) of the <ul> element.
+            list.lastElementChild.before(newLi);
+
+        Obs: After insert the <li> element before the last item in the <ul>, it is possible change the position of the <li> element detaching it from one position to another using the 'newLi' constant. It is possible because every element is an object and what is stored in 'newLi' constant is the reference, not a copy. To use a new one, it is necessary create another onde.
+        Obs: Other methods:
+           ----------------------------------------------------------------------------
+           | list.lastElementChild.before([element]);                                 |
+           | list.lastElementChild.after([element]);                                  |
+           | list.lastElementChild.replaceWith([element]);                            |
+           | secondLi.insertAdjacentElement([position], [element])                    |
+           | *[position] values: 'beforebegin', 'afterbegin', 'beforeend', 'afterend' |
+           ----------------------------------------------------------------------------
+        
+- Cloning DOM Elements 
+    - To clone a DOM element, use the following method:
+        const newLi2 = newLi.cloneNode([boolean]);
+        - true: clone the descendants child
+        - false: does not clone the descendants child
+
+- Live Node Lists vs Static Node Lists
+    - Live Node LIsts: document.getElementBy[Id, Name, TagName, ClassName] 
+            - Generates a referente of an object that can be a list(HTMLCollection), so all changes and new items inserted in the list affects the list object.
+    - Status Node Lists: document.querySelector() and document.querySelectorAll()
+            - Generates a snapshot of a list(NodeList). So all changes and new items inserted, will not affect and appear in the list. But if one of the existing items in the list is modified, for example, changing the text of one of them, the change will affect the list and will be registered because the item already existed in the list and as it is an object, we have its reference.
+
+- Removing Elements
+    - There are three ways to remove elments from the DOM:
+        1) Using [element].remove(): This will remove the [element] from the DOM. It is not compatible with Internet Explorer. If this compatibility is not important, the [element].remove() way is the recommended.
+        2) Accessing the parent of the element that will be removed
+            - Access the element that will be removed
+                const list = document.querySelector('ul');
+            - Access its parent and remove the child, in this case, the <ul> element.
+                list.parentElement.removeChild(list);
+        3) Clears all HTML content of [element] and hence removes any objects rendered in there. 
+            - [element].innerHTML = ''
+
+    Obs: Want to append to existing text?
+        - [element].textContent = [element].textContent + 'More text!';
