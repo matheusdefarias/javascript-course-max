@@ -173,12 +173,13 @@
         - Directly set the CSS classes assigned to the element
         - Set/Control all classes at once
         - You can also control the id or other properties
+        - Erase existing classes
         - element.className = 'red-bg';
 
     - Via classList
         - Conveniently add, remove or toggle CSS classes
         - Fine-grained control over classes that are added
-        - Can be used with className (with care)
+        - Can be used with className (with care) (Add the class to the list of existing classes)
         - element.classList.add()
         - element.classList.remove()
         - element.classList.toggle('visible')
