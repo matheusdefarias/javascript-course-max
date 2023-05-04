@@ -1,0 +1,136 @@
+- Creating Arrays
+    - const arr = [] // Creates an empty array like this -> []
+    - const arr = [1, 2, 3] // Creates an array like this -> [1, 2, 3]
+    - const arr = Array() // Creates an empty array like this -> []
+    - const arr = Array(3) // Creates an empty array with length of 3 like this -> [ ,  ,  ]
+    - const arr = Array(1, 2, 3) // Creates an array like this -> [1, 2, 3]
+    - const arr = new Array() // Creates an empty array like this -> []
+    - const arr = new Array(3) // Creates an empty array with length of 3 like this -> [ ,  ,  ]
+    - const arr = new Array(1, 2, 3) // Creates an array like this -> [1, 2, 3]
+    - const arr = Array.from("Hi!") // Creates an array like this -> ["H", "i", "!"]. In this case, Array.from() accepts an iterable and converts it to an array.
+
+- push(), pop(), unshift(), shift() - Adding & Removing Elements
+    - const hobbies = ['Sports', 'Cooking'];
+    - hobbies.push('Reading'); 
+        // Push the 'Reading' string to the end of the array 'hobbies': ['Sports', 'Cooking', 'Reading']
+    - hobbies.unshift('Coding'); 
+        // Shift all elements to the right and put the 'Coding' string in the first position of the array. Returns the length of the final array, in this case, 4. The elements' indexes are increased: ['Coding', 'Sports', 'Cooking', 'Reading']
+    - const poppedValue = hobbies.pop(); 
+        // Remove the last element from the array. Returns the element removed: ['Coding', 'Sports', 'Cooking'] / poppedValue = 'Reading'
+    - const shiftedValue = hobbies.shift(); 
+        // Shift all elements to the left and remove 'Coding' string in from the first position of the array. Returns the element shifted. The elements' indexes are decreased: ['Sports', 'Cooking'] / shiftedValue = 'Coding' 
+    - console.log(hobbies);
+        // ['Sports', 'Cooking']
+    - push() and pop() are faster than shift() and unshift()
+    - hobbies[5] = 'Reading'
+        // The 'hobbies' array has only 2 items, ['Sports', 'Cooking'] with indexes 0 and 1. 'Reading' is being inserted in the index 5 that does not exist.
+        // So the index 5 will be created to provide access to the 'Reading' element and the indexes between 1 and 5(2, 3, 4) will be empty. 
+
+- The splice() method
+    - Insert elements or items between other elements or items in the array.
+    - Is only available for real arrays. It is not available for array-like objects and other iterables.
+    - Array.splice(start: number, deleteCount: number, ...items: string[]): string[]
+    - Returns the removed element
+
+- Selecting Ranges & Creating Copies with slice()
+    - slice(start?: number, end?: number): number[]
+    - const testResults = [1, 5.3, 1.5, 10.99, -5, 10];
+    - const copyTestResults = testResults.slice(); // Creates a copy of testResults array and stores in copyTestResults
+    - const slicedArray = testResults.slice(0, 2);
+    - console.log(slicedArray); // [1, 5.3]
+    - const slicedArray = testResults.slice(2);
+    - console.log(slicedArray); // [1.5, 10.99, -5, 10]
+
+- Adding Arrays to Arrays with concat()
+    - Return a new array
+    - const testResults = [1, 5.3, 1.5, 10.99, -5, 10];
+    - const newArray = testResults.concat([1, 2, 3, 4]);
+    - console.log(newArray); // [1, 5.3, 1.5, 10.99, -5, 10, 1, 2, 3, 4]
+    - Obs: const newArray = testResults.push([1, 2, 3, 4]);
+        - console.log(newArray); // [1, 5.3, 1.5, 10.99, -5, 10, [1, 2, 3, 4]]
+
+- Retrieving Indexes with indexOf() /& lastIndexOf()
+    - indexOf(searchElement: number, fromIndex?: number): number
+    - const testResults = [1, 5.3, 1.5, 10.99, -5, 10];
+    - console.log(testResults.indexOf(1.5)); // 2
+    - const testResults = [1, 5.3, 1.5, 10.99, 1.5, -5, 10];
+    - console.log(testResults.indexOf(1.5)); // Returns the index of the first match: 2
+    - console.log(testResults.lastIndexOf(1.5)); // Returns the index of the first match: 4
+    
+    - indexOf() and lastIndexOf() does not work well with references objects
+    - const personData = [{name: 'Max'}, {name:'Manuel'}];
+    - console.log(personData.indexOf({name:'Manuel'})) // -1 means that couldn't find 
+
+- Finding Stuff: find() and findIndex()
+    - array.find(function(currentValue, index, arr),thisValue)
+    - If True, returns the element
+    
+    const personData = [{ name: 'Max' }, { name: 'Manuel' }];
+    console.log(personData.indexOf({ name: 'Manuel'}));
+    const manuel = personData.find((person, idx, persons) => {
+    return person.name === 'Manuel';
+    });
+    console.log(manuel); // { name: 'Manuel' } is the reference, not a copy
+
+    manuel.name = 'Anna';
+    console.log(manuel, personData);
+
+    const maxIndex = personData.findIndex((person, idx, persons) => {
+    return person.name === 'Max';
+    });
+    console.log(maxIndex); // Returns the index, in this case, 0
+
+    - const testResults = [1, 5.3, 1.5, 10.99, -5, 10];
+    - array.includes(); returns True or False
+    - console.log(testResults.includes(10.99)); // Returns True
+
+- Alternative to for Loops: The forEach() Method
+    - array.forEach(value: number, index: number, array: number[]): void
+    
+    const prices = [10.99, 5.99, 3.99, 6.59];
+    const tax = 0.19;
+    const taxAdjustedPrices = [];
+
+    prices.forEach((price, idx, prices) => {
+        const priceObj = {index: idx, taxAdjPrice> price * (1+tax) };
+        taxAdjustedPrices.push(priceObj);
+    });
+
+    console.log(taxAdjustedPrices);
+
+- Transforming Data with map()
+    - array.map(function(currentValue, index, arr), thisValue)
+    
+    const prices = [10.99, 5.99, 3.99, 6.59];
+    const tax = 0.19;
+    
+    const taxAdjustedPrices = prices.map((price, idx, prices) => {
+        const priceObj = {index: idx, taxAdjPrice> price * (1+tax) };
+        return priceObj;
+    });
+
+    console.log(prices, taxAdjustedPrices);
+
+- sort()ing and reverse()ing
+    - https://www.w3schools.com/js/js_array_sort.asp
+    
+    const prices = [10.99, 5.99, 3.99, 6.59];
+
+    const sortedPrices = prices.sort((a, b) => {
+    if (a > b) {
+        return 1;
+    } else if (a === b) {
+        return 0;
+    } else {
+        return -1;
+    }
+    });
+    console.log(sortedPrices);
+    console.log(sortedPrices.reverse());
+
+- Filtering Arrays with filter()
+    const prices = [10.99, 5.99, 3.99, 6.59];
+    const filteredArray = prices.filter((price, index, prices) => {
+        return price > 6;
+    });
+    console.log(filteredArray); // 
