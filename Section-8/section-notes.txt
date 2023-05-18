@@ -134,3 +134,136 @@
         return price > 6;
     });
     console.log(filteredArray); // 
+
+- The Important reduce() Method
+    - array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
+    - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
+
+    const numbers = [15.5, 2.3, 1.1, 4.7];
+    
+    function getSum(total, num) {
+    return total + Math.round(num);
+    }
+
+    Chaining Methods in JavaScript
+        With all these useful array methods you learned about, it's important to understand how you can combine them. Let's take map() and reduce() as an example:
+
+        const originalArray = [{price: 10.99}, {price: 5.99}, {price: 29.99}];
+        const transformedArray = originalArray.map(obj => obj.price); // produces [10.99, 5.99, 29.99]
+        const sum = transformedArray.reduce((sumVal, curVal) => sumVal + curVal, 0); // => 46.97
+        Of course, you could skip the map step and just add the extraction logic to reduce():
+
+        const originalArray = [{price: 10.99}, {price: 5.99}, {price: 29.99}];
+        const sum = originalArray.reduce((sumVal, curVal) => sumVal + curVal.price, 0); // => 46.97
+        But let's say you have a more complex extraction logic and hence want to split this into multiple method calls. Or you have a re-usable map function which you want to be able to use in different places of your app. Then you can still write the initial example in a more concise way if you leverage method chaining:
+
+        const originalArray = [{price: 10.99}, {price: 5.99}, {price: 29.99}];
+        const sum = originalArray.map(obj => obj.price).reduce((sumVal, curVal) => sumVal + curVal, 0); // => 46.97
+        We call .reduce() directly on the result of map() (which produces an array, that's why this is possible). Hence we can avoid storing the mapped array in a separate constant or variable that we might not need in any other place.
+
+- Arrays & Strings - split() and join()
+    - split()
+        const data = 'new york;10.99;2000';
+        const transformedData = data.split(';');
+        transformedData[1] = +transformedData[1]
+        console.log(transformedData) // ["new york", 10.99, "2000"]
+    
+    join()
+        - Converts all items joined to string type
+        - The default join caracter is a comma(',')
+        const nameFragements = ['Max', 'Schwarz'];
+        const name = nameFragements.join(' ');
+        console.log(name); // 'Max Schwarz'
+
+- The Spread Operator(...)
+    - Copy the content of an array or object to another array or object.
+    - Create a copy instead of being passed by reference.
+    
+    const nameFragments = ['Max', 'Schwarz'];    
+    const copiedNameFragments = [...nameFragments];
+    nameFragments.push('Mr');
+    console.log(nameFragments, copiedNameFragments);
+
+    console.log(Math.min(...prices));
+
+    const persons = [{ name: 'Max', age: 30 }, { name: 'Manuel', age: 31 }];
+    const copiedPersons = persons.map(person => ({
+    name: person.name,
+    age: person.age
+    }));
+
+    persons.push({ name: 'Anna', age: 29 });
+    persons[0].age = 31;
+
+    console.log(persons, copiedPersons);
+
+- Understanding Array Destructuring
+    const nameData = ['Matheus', 'Santos', 'Mr', 30];
+    const [ firstName, lastName, ...otherInformation] = nameData;
+    console.log(firstName, lastName, otherInformation) // Matheus Santos ['Mr', 30]
+
+- Maps & Sets - Overview
+    - Arrays:
+        - Store (nested) data of any kind and length
+        - Iterable, also many special set methods available
+        - Order is guaranteed, duplicates are allowed, zero-based index to access elements
+    - Sets:
+        - Store (nested) data of any kind and length
+        - Iterable, also many special array methods available
+        - Order is NOT guaranteed, duplicates are NOT allowed, no index-based to access elements
+    - Maps:
+        - Store key-value data of any kind and length, and key values are allowed
+        - Iterable, also some special map methods available
+        - Order is guaranteed, duplicates keys are NOT allowed, key-based access
+
+- Working with Sets
+    const ids = new Set(['Hi', 'from', 'set!']);
+    ids.add(2);
+    if (ids.has('Hi')) {
+        ids.delete('Hi');
+    }
+
+    for (const entry of ids.entries()) {
+        console.log(entry[0]);
+    }
+
+- Working with Maps
+    const person1 = { name: 'Max' };
+    const person2 = { name: 'Manuel' };
+
+    const personData = new Map([[person1, [{ date: 'yesterday', price: 10 }]]]);
+
+    personData.set(person2, [{ date: 'two weeks ago', price: 100 }]);
+
+    console.log(personData);
+    console.log(personData.get(person1));
+
+    for (const [key, value] of personData.entries()) {
+    console.log(key, value);
+    }
+
+    for (const key of personData.keys()) {
+    console.log(key);
+    }
+
+    for (const value of personData.values()) {
+    console.log(value);
+    }
+
+    console.log(personData.size);
+
+- Maps vs. Objects
+    - Maps:
+        - Can use ANY values (and types) as keys
+        - Better performance for large quantities of data
+        - Better performance when adding + removing data frequently
+    - Objects:
+        - Only may use strings, numbers or symbols as keys
+        - Perfect for small/medium-sized sets of data
+        - Easier/quicker to create (typically also with better performance)
+
+- Understanding WeakSet and WeakMap
+    https://javascript.info/weakmap-weakset
+    https://blog.logrocket.com/weakmap-weakset-understanding-javascript-weak-references/
+    https://medium.com/yemeksepeti-teknoloji/map-set-weakmap-and-weakset-in-javascript-c47e3b120a01
+
