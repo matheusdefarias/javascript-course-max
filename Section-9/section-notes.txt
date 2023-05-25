@@ -1,0 +1,138 @@
+- Objects - Recap
+    const person = {
+        name: 'Max',
+        age: 30,
+        hobbies: ['Sports', 'Cooking'],
+        greet: function() {
+            alert('Hi there!');
+        }
+    }
+
+    person.greet();
+
+- Adding, Modifying and Deleting Properties
+    const person = {
+        name: 'Max',
+        age: 30,
+        hobbies: ['Sports', 'Cooking'],
+        greet: function() {
+            alert('Hi there!');
+        }
+    }
+    
+    - To modify a property value, just do the following:
+        person.age = 20;
+
+    - To add a property to the object, a way is doing:
+        person.isAdmin = true;
+
+    - To remove a property from an object, a way is doing:
+        delete person.age;
+
+- Special Key Names & Square Bracket Property Access
+    - Objects are a set of key-values pairs.
+    - A key can be like a variable name or a string between single quote.
+        let person = {
+            firstName: 'Max',
+            'last name': 'Freeman'
+            }
+    
+    - To access the property string key, do the following:
+        console.log(person.firstName); // Max
+        console.log(person['last name']); // Freeman
+
+- Dynamic Property Access & Setting Properties Dynamically
+
+    const userChosenKeyName = 'age';
+
+    let person = {
+            firstName: 'Max',
+            'last name': 'Freeman',
+            [userChosenKeyName] = 15
+            }
+    
+    const keyName = 'last name';
+
+    - To access a property dinamically, do that:
+        console.log(person[keyName]); // Freeman
+
+- Understanding Object.assign()
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
+
+- Object Destructuring
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+
+- Checking for Property in Object
+    if '[property]' in [object]{
+        ....
+    }
+
+- Introducing "this"
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this
+
+- "this" - Summary
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this
+    https://medium.com/@siddiqr67/understanding-this-keyword-its-bindings-behavior-in-arrow-functions-6a8074b513c1
+
+    The this keyword can lead to some headaches in JavaScript - this summary hopefully acts as a remedy.
+    this refers to different things, depending on where it's used and how (if used in a function) a function is called.
+    Generally, this refers to the "thing" which called a function (if used inside of a function). That can be the global context, an object or some bound data/ object (e.g. when the browser binds this to the button that triggered a click event).
+
+    1) this in Global Context (i.e. outside of any function)
+
+    function something() { ... }    
+    console.log(this); // logs global object (window in browser) - ALWAYS (also in strict mode)!
+
+    2) this in a Function (non-Arrow) - Called in the global context
+
+    function something() { 
+        console.log(this);
+    }
+    something(); // logs global object (window in browser) in non-strict mode, undefined in strict mode
+
+    3) this in an Arrow-Function - Called in the global context
+
+    const something = () => { 
+        console.log(this);
+    }
+    something(); // logs global object (window in browser) - ALWAYS (also in strict mode)!
+
+    4) this in a Method (non-Arrow) - Called on an object
+
+    const person = { 
+        name: 'Max',
+        greet: function() { // or use method shorthand: greet() { ... }
+            console.log(this.name);
+        }
+    };
+    person.greet(); // logs 'Max', "this" refers to the person object
+
+    5) this in a Method (Arrow Function) - Called on an object
+
+    const person = { 
+        name: 'Max',
+        greet: () => {
+            console.log(this.name);
+        }
+    };
+    
+    person.greet(); // logs nothing (or some global name on window object), "this" refers to global (window) object, even in strict mode
+    this can refer to unexpected things if you call it on some other object, e.g.:
+
+    const person = { 
+        name: 'Max',
+        greet() {
+            console.log(this.name);
+        }
+    };
+    
+    const anotherPerson = { name: 'Manuel' }; // does NOT have a built-in greet method!
+    
+    anotherPerson.sayHi = person.greet; // greet is NOT called here, it's just assigned to a new property/ method on the "anotherPerson" object
+    
+    anotherPerson.sayHi(); // logs 'Manuel' because method is called on "anotherPerson" object => "this" refers to the "thing" which called it
+    If in doubt, a console.log(this); can always help you find out what this is referring to at the moment!
+
+- Getters & Setters
+    https://www.programiz.com/javascript/getter-setter
+    https://www.alura.com.br/artigos/as-classes-no-javascript?gclid=Cj0KCQjwjryjBhD0ARIsAMLvnF8u_RdxjIY4NbGmT86Fjd8heohYa-S9mtbSchY-C9gN79m56FEnS7kaAtZtEALw_wcB

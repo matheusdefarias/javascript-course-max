@@ -40,7 +40,7 @@
             anotherUser // 'Max'
             name = 'Manuel';
             anotherUser // 'Max'
-    - Reference values: All other objects ("more expensive to create")
+    - Reference values: All other objects ("more expensive to create"). {...} literal objects, Arrays, DOM Nodes.
         - Stored in memory (Heap), variables stores a pointer (adsress) to location in memory
         - The variable stores a memory address
         - Example 1:
