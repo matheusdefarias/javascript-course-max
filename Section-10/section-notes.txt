@@ -1,0 +1,24 @@
+- What is Object-oriented Programming(OOP)?
+    - Work with real-life entities in your code
+
+- Defining & Using a First Class
+    - Objects
+        - The things you work with in code
+        - Instances of classes(= based on classes)
+        - Class-based creation is an alternative to using object literals
+    
+    - classes
+        - Blueprints for objects(theoretical definition)
+        - Define how objects look like, which properties and methods they have
+        - Classes make creation of multiple, similar objects much easier
+    
+- Static Methods & Properties
+    - Static Field / Property / Method
+        - Defined with 'static' keyword
+        - Only accessible on class itself, without instantiation (i.e. not on instance)
+        - Typically used in helper classes, global configuration etc.
+
+    - Instance Field / Property / Method
+        - Defined without static keyword
+        - Only accessible on instances (= objects) based on class
+        - Used for core, re-usable logic
