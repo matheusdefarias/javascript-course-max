@@ -1,0 +1,23 @@
+- Working with Element Sizes & Positions
+    - [element].getBoundingClientRect(): provides information about the element positioning and size.
+    Output:
+    {
+    "x": 0,
+    "y": 0,
+    "width": 1907.25,
+    "height": 1007,
+    "top": 0,
+    "right": 1907.25,
+    "bottom": 1007,
+    "left": 0
+    }
+
+    - [element].offsetLeft(): provides the distance from the most top left point of the element to que top of parent box.
+    - [element].clientTop/Left(): provides the top and left border's thickness.
+    - [element].offsetWidth(): provides the element's width including borders.
+    - [element].offsetHeight(): provides the element's height including borders.
+    - [element].clientWidth(): provides the element's width excluding borders.
+    - [element].clientHeight(): provides the element's height excluding borders.
+    - [element].scrollHeight: provides the height of content that is being scrolled including the not visible content.
+    - [element].scrollTo(0, 50): Scroll the bar to a specific position.
+    - [element].scrollBy(0, 50): Scroll the bar by certain amount.
